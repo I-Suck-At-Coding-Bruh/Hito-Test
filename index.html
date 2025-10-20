@@ -128,7 +128,7 @@ h1 { margin: 0 0 6px 0; font-size: 22px; }
   cursor: pointer;
 }
 
-/* Fullscreen iframe */
+/* Fullscreen iframe and exit button */
 .fullscreen-iframe {
   position: fixed;
   inset: 0;
@@ -137,6 +137,22 @@ h1 { margin: 0 0 6px 0; font-size: 22px; }
   border: none;
   z-index: 999;
   background: black;
+}
+.exit-btn {
+  position: fixed;
+  top: 14px;
+  right: 14px;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  font-size: 20px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.exit-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
 }
 </style>
 </head>
@@ -188,7 +204,7 @@ h1 { margin: 0 0 6px 0; font-size: 22px; }
 
     <div class="game-card">
       <h3>Undertale Yellow [Not Functional]</h3>
-      <p>Undertale Yellow is a fan prequel to Undertale following a new protagonist through the Underground before Frisk’s journey. This game is currently playable but buggy, assets might be glitched in some parts.</p>
+      <p>Undertale Yellow is a fan prequel to Undertale following a new protagonist through the Underground before Frisk’s journey.</p>
       <button class="play-btn" data-url="https://iamchristians.github.io/assets/games/undertaleyellow/index.html">Play</button>
     </div>
 
@@ -247,32 +263,27 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Regular play buttons (with iframe for games)
+  // Handle play buttons
   document.querySelectorAll('.play-btn').forEach(btn => {
     btn.addEventListener('click', () => {
+      const iframe = document.createElement('iframe');
+      iframe.className = 'fullscreen-iframe';
+      const exitBtn = document.createElement('button');
+      exitBtn.textContent = '×';
+      exitBtn.className = 'exit-btn';
+      exitBtn.addEventListener('click', () => {
+        iframe.remove();
+        exitBtn.remove();
+      });
+
       if (btn.id === 'hianimeBtn') {
         const saved = localStorage.getItem('lastHianimeURL') || btn.dataset.url;
-        const iframe = document.createElement('iframe');
         iframe.src = saved;
-        iframe.className = 'fullscreen-iframe';
-        document.body.appendChild(iframe);
-
-        // Periodically save HiAnime page URL
-        const interval = setInterval(() => {
-          try {
-            const current = iframe.contentWindow.location.href;
-            if (current.includes('hianime.cx')) {
-              localStorage.setItem('lastHianimeURL', current);
-            }
-          } catch (e) {
-            // cross-origin: ignore safely
-          }
-        }, 4000);
+        document.body.append(iframe, exitBtn);
+        localStorage.setItem('lastHianimeURL', saved);
       } else {
-        const iframe = document.createElement('iframe');
         iframe.src = btn.dataset.url;
-        iframe.className = 'fullscreen-iframe';
-        document.body.appendChild(iframe);
+        document.body.append(iframe, exitBtn);
       }
     });
   });

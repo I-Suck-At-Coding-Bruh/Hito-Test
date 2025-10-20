@@ -127,6 +127,17 @@ h1 { margin: 0 0 6px 0; font-size: 22px; }
   font-weight: 600;
   cursor: pointer;
 }
+
+/* Fullscreen iframe */
+#gameFrameFull {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  z-index: 1000;
+  display: none;
+}
 </style>
 </head>
 <body>
@@ -200,12 +211,10 @@ h1 { margin: 0 0 6px 0; font-size: 22px; }
       <button class="play-btn" id="hianimeBtn" data-url="https://hianime.cx">Open</button>
     </div>
   </div>
-
-  <!-- IFRAME AREA -->
-  <div id="iframeContainer" style="margin-top:20px; flex:1; display:none;">
-    <iframe id="gameFrame" src="" style="width:100%; height:80vh; border:none; border-radius:10px;"></iframe>
-  </div>
 </div>
+
+<!-- Fullscreen Iframe -->
+<iframe id="gameFrameFull"></iframe>
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
@@ -215,8 +224,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const progressPercent = document.getElementById('progressPercent');
   const gamesPage = document.getElementById('gamesPage');
   const hianimeBtn = document.getElementById('hianimeBtn');
-  const iframeContainer = document.getElementById('iframeContainer');
-  const gameFrame = document.getElementById('gameFrame');
+  const gameFrameFull = document.getElementById('gameFrameFull');
   let progress = 0;
   let timer = null;
 
@@ -244,14 +252,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Play buttons now load in iframe
+  // Play buttons now open fullscreen iframe
   document.querySelectorAll('.play-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       const targetURL = btn.id === 'hianimeBtn'
         ? (localStorage.getItem('lastHianimeURL') || btn.dataset.url)
         : btn.dataset.url;
-      iframeContainer.style.display = 'block';
-      gameFrame.src = targetURL;
+      gameFrameFull.src = targetURL;
+      gameFrameFull.style.display = 'block';
+      document.body.style.overflow = 'hidden';
     });
   });
 

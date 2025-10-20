@@ -138,6 +138,25 @@ h1 { margin: 0 0 6px 0; font-size: 22px; }
   z-index: 1000;
   display: none;
 }
+
+/* Exit button */
+#exitBtn {
+  position: fixed;
+  top: 16px;
+  right: 20px;
+  z-index: 1100;
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  border: none;
+  font-size: 18px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: none;
+}
+#exitBtn:hover {
+  background: rgba(255, 50, 50, 0.8);
+}
 </style>
 </head>
 <body>
@@ -216,6 +235,9 @@ h1 { margin: 0 0 6px 0; font-size: 22px; }
 <!-- Fullscreen Iframe -->
 <iframe id="gameFrameFull"></iframe>
 
+<!-- Exit Button -->
+<button id="exitBtn">Exit</button>
+
 <script>
 document.addEventListener('DOMContentLoaded', () => {
   const downloadBtn = document.getElementById('downloadBtn');
@@ -223,8 +245,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const progressBar = document.getElementById('progressBar');
   const progressPercent = document.getElementById('progressPercent');
   const gamesPage = document.getElementById('gamesPage');
-  const hianimeBtn = document.getElementById('hianimeBtn');
   const gameFrameFull = document.getElementById('gameFrameFull');
+  const exitBtn = document.getElementById('exitBtn');
   let progress = 0;
   let timer = null;
 
@@ -252,23 +274,23 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Play buttons now open fullscreen iframe
+  // Play buttons -> fullscreen iframe
   document.querySelectorAll('.play-btn').forEach(btn => {
     btn.addEventListener('click', () => {
-      const targetURL = btn.id === 'hianimeBtn'
-        ? (localStorage.getItem('lastHianimeURL') || btn.dataset.url)
-        : btn.dataset.url;
+      const targetURL = btn.dataset.url;
       gameFrameFull.src = targetURL;
       gameFrameFull.style.display = 'block';
+      exitBtn.style.display = 'block';
       document.body.style.overflow = 'hidden';
     });
   });
 
-  // Save last visited HiAnime page when leaving site
-  window.addEventListener('beforeunload', () => {
-    if (window.location.href.includes('hianime.cx')) {
-      localStorage.setItem('lastHianimeURL', window.location.href);
-    }
+  // Exit button
+  exitBtn.addEventListener('click', () => {
+    gameFrameFull.style.display = 'none';
+    exitBtn.style.display = 'none';
+    gameFrameFull.src = '';
+    document.body.style.overflow = 'auto';
   });
 });
 </script>

@@ -128,34 +128,31 @@ h1 { margin: 0 0 6px 0; font-size: 22px; }
   cursor: pointer;
 }
 
-/* Fullscreen iframe */
-#gameFrameFull {
+/* Fullscreen iframe and exit button */
+.fullscreen-iframe {
   position: fixed;
   inset: 0;
   width: 100%;
   height: 100%;
   border: none;
-  z-index: 1000;
-  display: none;
+  z-index: 999;
+  background: black;
 }
-
-/* Exit button */
-#exitBtn {
+.exit-btn {
   position: fixed;
-  top: 16px;
-  right: 20px;
-  z-index: 1100;
-  background: rgba(0, 0, 0, 0.6);
+  top: 14px;
+  right: 14px;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.5);
   color: white;
   border: none;
-  font-size: 18px;
-  padding: 8px 14px;
-  border-radius: 8px;
+  font-size: 20px;
+  padding: 6px 10px;
+  border-radius: 6px;
   cursor: pointer;
-  display: none;
 }
-#exitBtn:hover {
-  background: rgba(255, 50, 50, 0.8);
+.exit-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
 }
 </style>
 </head>
@@ -198,7 +195,6 @@ h1 { margin: 0 0 6px 0; font-size: 22px; }
   <div class="games-header">
     <h2>Hito Games</h2>
   </div>
-
   <div class="game-list">
     <div class="game-card">
       <h3>Undertale</h3>
@@ -208,7 +204,7 @@ h1 { margin: 0 0 6px 0; font-size: 22px; }
 
     <div class="game-card">
       <h3>Undertale Yellow [Not Functional]</h3>
-      <p>Undertale Yellow is a fan prequel to Undertale following a new protagonist through the Underground before Frisk’s journey. This game is currently playable but buggy, assets might be glitched in some parts.</p>
+      <p>Undertale Yellow is a fan prequel to Undertale following a new protagonist through the Underground before Frisk’s journey.</p>
       <button class="play-btn" data-url="https://iamchristians.github.io/assets/games/undertaleyellow/index.html">Play</button>
     </div>
 
@@ -232,12 +228,6 @@ h1 { margin: 0 0 6px 0; font-size: 22px; }
   </div>
 </div>
 
-<!-- Fullscreen Iframe -->
-<iframe id="gameFrameFull"></iframe>
-
-<!-- Exit Button -->
-<button id="exitBtn">Exit</button>
-
 <script>
 document.addEventListener('DOMContentLoaded', () => {
   const downloadBtn = document.getElementById('downloadBtn');
@@ -245,8 +235,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const progressBar = document.getElementById('progressBar');
   const progressPercent = document.getElementById('progressPercent');
   const gamesPage = document.getElementById('gamesPage');
-  const gameFrameFull = document.getElementById('gameFrameFull');
-  const exitBtn = document.getElementById('exitBtn');
+  const hianimeBtn = document.getElementById('hianimeBtn');
   let progress = 0;
   let timer = null;
 
@@ -274,23 +263,29 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Play buttons -> fullscreen iframe
+  // Handle play buttons
   document.querySelectorAll('.play-btn').forEach(btn => {
     btn.addEventListener('click', () => {
-      const targetURL = btn.dataset.url;
-      gameFrameFull.src = targetURL;
-      gameFrameFull.style.display = 'block';
-      exitBtn.style.display = 'block';
-      document.body.style.overflow = 'hidden';
-    });
-  });
+      const iframe = document.createElement('iframe');
+      iframe.className = 'fullscreen-iframe';
+      const exitBtn = document.createElement('button');
+      exitBtn.textContent = '×';
+      exitBtn.className = 'exit-btn';
+      exitBtn.addEventListener('click', () => {
+        iframe.remove();
+        exitBtn.remove();
+      });
 
-  // Exit button
-  exitBtn.addEventListener('click', () => {
-    gameFrameFull.style.display = 'none';
-    exitBtn.style.display = 'none';
-    gameFrameFull.src = '';
-    document.body.style.overflow = 'auto';
+      if (btn.id === 'hianimeBtn') {
+        const saved = localStorage.getItem('lastHianimeURL') || btn.dataset.url;
+        iframe.src = saved;
+        document.body.append(iframe, exitBtn);
+        localStorage.setItem('lastHianimeURL', saved);
+      } else {
+        iframe.src = btn.dataset.url;
+        document.body.append(iframe, exitBtn);
+      }
+    });
   });
 });
 </script>

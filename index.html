@@ -27,7 +27,6 @@ html, body {
   justify-content: center;
 }
 
-/* Installer Container */
 .container {
   width: min(920px, 94%);
   background: linear-gradient(180deg, #151515, var(--dark-panel));
@@ -43,13 +42,11 @@ html, body {
 h1 { margin: 0 0 6px 0; font-size: 22px; }
 .lead { margin: 0 0 18px 0; color: var(--muted); font-size: 13px; }
 
-/* Controls Section */
 .controls { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
 .controls > .spacer { flex: 1; }
 .controls > .help-text { font-size: 12px; color: var(--muted); }
 .info-text { margin-top: 12px; color: var(--muted); font-size: 13px; }
 
-/* Buttons */
 .primary {
   background: var(--btn); color: #fff; border: 0; padding: 14px 22px;
   font-size: 16px; border-radius: 10px; cursor: pointer;
@@ -61,11 +58,13 @@ h1 { margin: 0 0 6px 0; font-size: 22px; }
   padding: 10px 14px; border-radius: 8px; font-size: 13px;
 }
 
-/* Right Panel */
 .right {
   width: 320px; background: var(--panel); padding: 16px; border-radius: 10px;
   text-align: center;
 }
+.download-title { font-size: 18px; font-weight: 600; }
+.download-info { margin-top: 6px; color: var(--muted); font-size: 13px; }
+
 .progress-wrap { margin-top: 6px; text-align: left; }
 .progress-info {
   display: flex;
@@ -84,7 +83,6 @@ h1 { margin: 0 0 6px 0; font-size: 22px; }
   transition: width .2s linear;
 }
 
-/* Games Page */
 .games-page {
   position: fixed;
   inset: 40px;
@@ -105,6 +103,12 @@ h1 { margin: 0 0 6px 0; font-size: 22px; }
   pointer-events: auto;
   transform: scale(1);
 }
+.games-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.games-header h2 { margin: 0; font-size: 20px; }
 .game-list { margin-top: 18px; display: flex; flex-direction: column; gap: 18px; }
 .game-card {
   background: #121214;
@@ -112,6 +116,8 @@ h1 { margin: 0 0 6px 0; font-size: 22px; }
   padding: 16px;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
 }
+.game-card h3 { margin: 0 0 6px 0; font-size: 17px; }
+.game-card p { margin: 0 0 8px 0; color: var(--muted); font-size: 13px; }
 .play-btn {
   background: var(--accent);
   color: #fff;
@@ -120,17 +126,6 @@ h1 { margin: 0 0 6px 0; font-size: 22px; }
   border: none;
   font-weight: 600;
   cursor: pointer;
-}
-
-/* Game Frame */
-#gameFrame {
-  position: fixed;
-  inset: 0;
-  border: none;
-  width: 100%;
-  height: 100%;
-  display: none;
-  z-index: 100;
 }
 </style>
 </head>
@@ -147,12 +142,16 @@ h1 { margin: 0 0 6px 0; font-size: 22px; }
       <div class="spacer"></div>
       <div class="help-text">Need help? Contact support</div>
     </div>
-    <p class="info-text">Follow the on-screen instructions to complete installation.</p>
+
+    <p class="info-text">
+      Follow the on-screen instructions to complete installation.
+    </p>
   </div>
 
   <div class="right" id="downloadScreen" style="display:none;">
     <div class="download-title">Downloading...</div>
     <div class="download-info">Please wait while the installation completes.</div>
+
     <div class="progress-wrap">
       <div class="progress-info">
         <span id="progressLabel">Preparing files</span>
@@ -165,34 +164,48 @@ h1 { margin: 0 0 6px 0; font-size: 22px; }
   </div>
 </div>
 
-<!-- Hidden Games Page -->
 <div id="gamesPage" class="games-page">
-  <h2>Hito Games</h2>
+  <div class="games-header">
+    <h2>Hito Games</h2>
+  </div>
+
   <div class="game-list">
     <div class="game-card">
       <h3>Undertale</h3>
+      <p>Undertale is a 2D role-playing video game created by Toby Fox where you can choose between fighting or sparing monsters.</p>
       <button class="play-btn" data-url="https://iamchristians.github.io/assets/games/undertale/index.html">Play</button>
     </div>
+
     <div class="game-card">
-      <h3>Undertale Yellow</h3>
+      <h3>Undertale Yellow [Not Functional]</h3>
+      <p>Undertale Yellow is a fan prequel to Undertale following a new protagonist through the Underground before Frisk’s journey. This game is currently playable but buggy, assets might be glitched in some parts.</p>
       <button class="play-btn" data-url="https://iamchristians.github.io/assets/games/undertaleyellow/index.html">Play</button>
     </div>
+
     <div class="game-card">
       <h3>Deltarune</h3>
+      <p>Deltarune is a follow-up to Undertale by Toby Fox featuring new characters and a light-dark world adventure system.</p>
       <button class="play-btn" data-url="https://iamchristians.github.io/assets/games/deltarune/index.html">Play</button>
     </div>
+
     <div class="game-card">
       <h3>Subway Surfers: San Francisco</h3>
+      <p>Subway Surfers: San Francisco is part of the endless runner series set in the colorful streets of San Francisco.</p>
       <button class="play-btn" data-url="https://iamchristians.github.io/assets/games/subwaysurferssanfrancisco/index.html">Play</button>
     </div>
+
     <div class="game-card">
       <h3>HiAnime</h3>
-      <button class="play-btn" data-url="https://hianime.cx">Open</button>
+      <p>HiAnime is a free streaming website where users can watch a wide variety of anime online in high quality.</p>
+      <button class="play-btn" id="hianimeBtn" data-url="https://hianime.cx">Open</button>
     </div>
   </div>
-</div>
 
-<iframe id="gameFrame"></iframe>
+  <!-- IFRAME AREA -->
+  <div id="iframeContainer" style="margin-top:20px; flex:1; display:none;">
+    <iframe id="gameFrame" src="" style="width:100%; height:80vh; border:none; border-radius:10px;"></iframe>
+  </div>
+</div>
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
@@ -201,11 +214,13 @@ document.addEventListener('DOMContentLoaded', () => {
   const progressBar = document.getElementById('progressBar');
   const progressPercent = document.getElementById('progressPercent');
   const gamesPage = document.getElementById('gamesPage');
+  const hianimeBtn = document.getElementById('hianimeBtn');
+  const iframeContainer = document.getElementById('iframeContainer');
   const gameFrame = document.getElementById('gameFrame');
   let progress = 0;
   let timer = null;
 
-  // Simulate fake download progress
+  // Start fake download animation
   const startDownload = () => {
     downloadBtn.style.display = 'none';
     downloadScreen.style.display = 'block';
@@ -216,7 +231,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (progress >= 100) clearInterval(timer);
     }, 700);
   };
-
+  
   downloadBtn.addEventListener('click', startDownload);
 
   // Secret "~" to open games page
@@ -229,13 +244,22 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Play button → load iframe instead of redirect
+  // Play buttons now load in iframe
   document.querySelectorAll('.play-btn').forEach(btn => {
     btn.addEventListener('click', () => {
-      gameFrame.src = btn.dataset.url;
-      gameFrame.style.display = 'block';
-      gamesPage.style.display = 'none';
+      const targetURL = btn.id === 'hianimeBtn'
+        ? (localStorage.getItem('lastHianimeURL') || btn.dataset.url)
+        : btn.dataset.url;
+      iframeContainer.style.display = 'block';
+      gameFrame.src = targetURL;
     });
+  });
+
+  // Save last visited HiAnime page when leaving site
+  window.addEventListener('beforeunload', () => {
+    if (window.location.href.includes('hianime.cx')) {
+      localStorage.setItem('lastHianimeURL', window.location.href);
+    }
   });
 });
 </script>

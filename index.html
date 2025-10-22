@@ -256,22 +256,29 @@
       background: black;
     }
 
+    /* =========================
+       EXIT BUTTON
+    ========================= */
     .exit-btn {
       position: fixed;
-      top: 14px;
-      right: 14px;
+      top: 20px;
+      right: 25px;
       z-index: 1000;
-      background: rgba(0, 0, 0, 0.5);
-      color: white;
+      width: 40px;
+      height: 40px;
+      font-size: 24px;
       border: none;
-      font-size: 20px;
-      padding: 6px 10px;
-      border-radius: 6px;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.55);
+      color: #fff;
       cursor: pointer;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+      transition: all 0.25s ease;
     }
-
     .exit-btn:hover {
-      background: rgba(255, 255, 255, 0.2);
+      background: rgba(255, 60, 60, 0.8);
+      transform: scale(1.15);
+      box-shadow: 0 0 15px rgba(255, 80, 80, 0.4);
     }
   </style>
 </head>
@@ -290,7 +297,7 @@
 
       <div class="controls">
         <button id="downloadBtn" class="primary">Download Now [546 MB]</button>
-        <div class="secondary">v1.5.0</div>
+        <div class="secondary">v1.5.1</div>
         <div class="spacer"></div>
         <div class="help-text">Need help? Contact support</div>
       </div>

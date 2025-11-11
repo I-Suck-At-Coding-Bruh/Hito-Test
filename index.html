@@ -384,6 +384,12 @@
         <button class="play-btn" data-url="https://hianime.cx">Open</button>
       </div>
 
+      <div class="game-card">
+        <h3>Offical Hito Planner</h3>
+        <p>This is just a test site, redirect to the offical site here.</p>
+        <button class="play-btn" data-url="https://wz7bgm37tchdlxvvdgd2aszt9xtzlnkd6ifjlqb.github.io/oEpKCsCugr1F4AdZIOsqPv7eVC2PcBlnPbGzQVUpjE9zyMgEcAU2XPqJrbWhIUx2vEZiCcvQBRrAfy5LWI7WqJgPFYsZXFP1dCxm/">redirect</button>
+      </div>
+      
     </div>
   </div>
 
@@ -437,48 +443,53 @@ document.addEventListener('DOMContentLoaded', () => {
   /* -------------------------------
      PLAY BUTTONS - FULLSCREEN MODE
   --------------------------------*/
-  document.querySelectorAll('.play-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const iframe = document.createElement('iframe');
-      iframe.className = 'fullscreen-iframe';
-      iframe.src = btn.dataset.url;
-      iframe.allowFullscreen = true;
-      iframe.style.cssText = `
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        border: none;
-        z-index: 9998;
-      `;
+document.querySelectorAll('.play-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const url = btn.dataset.url;
+    const title = btn.previousElementSibling?.textContent?.trim().toLowerCase() || "";
+    
+    if (title.includes("offical hito planner")) {
+      window.open(url, "_blank");
+      return;
+    }
+    const iframe = document.createElement('iframe');
+    iframe.className = 'fullscreen-iframe';
+    iframe.src = url;
+    iframe.allowFullscreen = true;
+    iframe.style.cssText = `
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      border: none;
+      z-index: 9998;
+    `;
 
-      // EXIT BUTTON
-      const exitBtn = document.createElement('button');
-      exitBtn.textContent = '×';
-      exitBtn.className = 'exit-btn';
-      exitBtn.style.cssText = `
-        position: fixed;
-        top: 10px;
-        right: 20px;
-        font-size: 2rem;
-        background: rgba(0,0,0,0.5);
-        color: white;
-        border: none;
-        border-radius: 50%;
-        width: 40px;
-        height: 40px;
-        cursor: pointer;
-        z-index: 9999;
-      `;
+    const exitBtn = document.createElement('button');
+    exitBtn.textContent = '×';
+    exitBtn.className = 'exit-btn';
+    exitBtn.style.cssText = `
+      position: fixed;
+      top: 10px;
+      right: 20px;
+      font-size: 2rem;
+      background: rgba(0,0,0,0.5);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      z-index: 9999;
+    `;
 
-      exitBtn.addEventListener('click', () => {
-        iframe.remove();
-        exitBtn.remove();
-      });
-
-      document.body.append(iframe, exitBtn);
+    exitBtn.addEventListener('click', () => {
+      iframe.remove();
+      exitBtn.remove();
     });
+
+    document.body.append(iframe, exitBtn);
   });
 });
 </script>

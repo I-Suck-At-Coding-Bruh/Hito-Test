@@ -7,9 +7,6 @@
   <link rel="icon" type="image/png" href="favicon.png">
 
   <style>
-    /* =======================
-       ROOT VARIABLES & COLORS
-    ======================= */
     :root {
       --bg: #1e1e1e;
       --panel: #252525;
@@ -21,9 +18,6 @@
       --progress-bg: #0f0f0f;
     }
 
-    /* =======================
-       BASE LAYOUT
-    ======================= */
     html, body {
       height: 100%;
       margin: 0;
@@ -35,9 +29,6 @@
       justify-content: center;
     }
 
-    /* =======================
-       INSTALLER CONTAINER
-    ======================= */
     .container {
       width: min(920px, 94%);
       background: linear-gradient(180deg, #151515, var(--dark-panel));
@@ -63,9 +54,6 @@
       font-size: 13px;
     }
 
-    /* =======================
-       BUTTONS & TEXT
-    ======================= */
     .controls {
       display: flex;
       gap: 12px;
@@ -111,9 +99,6 @@
       font-size: 13px;
     }
 
-    /* =======================
-       DOWNLOAD PANEL
-    ======================= */
     .right {
       width: 320px;
       background: var(--panel);
@@ -158,9 +143,6 @@
       transition: width .2s linear;
     }
 
-    /* =======================
-       GAMES PAGE OVERLAY
-    ======================= */
     .games-page {
       position: fixed;
       inset: 40px;
@@ -194,9 +176,6 @@
       font-size: 20px;
     }
 
-    /* =======================
-       GAME LIST CARDS
-    ======================= */
     .game-list {
       margin-top: 18px;
       display: flex;
@@ -244,9 +223,6 @@
       cursor: pointer;
     }
 
-    /* =======================
-       FULLSCREEN IFRAME MODE
-    ======================= */
     .fullscreen-iframe {
       position: fixed;
       inset: 0;
@@ -257,9 +233,6 @@
       background: black;
     }
 
-    /* =========================
-       EXIT BUTTON
-    ========================= */
     .exit-btn {
       position: fixed;
       top: 20px;
@@ -276,6 +249,7 @@
       box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
       transition: all 0.25s ease;
     }
+
     .exit-btn:hover {
       background: rgba(255, 60, 60, 0.8);
       transform: scale(1.15);
@@ -285,11 +259,7 @@
 </head>
 <body>
 
-  <!-- =======================
-       INSTALLER MAIN LAYOUT
-  ======================= -->
   <div class="container">
-    <!-- LEFT SIDE (Info + Buttons) -->
     <div class="left">
       <h1>Hito Planner Install Wizard</h1>
       <p class="lead">
@@ -308,7 +278,6 @@
       </p>
     </div>
 
-    <!-- RIGHT SIDE (Progress Bar) -->
     <div class="right" id="downloadScreen" style="display:none;">
       <div class="download-title">Downloading...</div>
       <div class="download-info">Please wait while the installation completes.</div>
@@ -325,19 +294,6 @@
     </div>
   </div>
 
-  <!-- =======================
-       SECRET GAMES PAGE
-       Press "~" after starting the download to access.
-       -----------------------------------------------
-       ▶ To ADD a new game:
-         1. Copy the "EXAMPLE GAME CARD" block below.
-         2. Paste it anywhere inside the <div class="game-list">.
-         3. Change:
-              - <h3>Title</h3> → your game's title
-              - <p>...</p> → a short game description
-              - data-url="..." → link to the game website or playable file
-  ======================= -->
-
   <div id="gamesPage" class="games-page">
     <div class="games-header">
       <h2>Hito Secret Page</h2>
@@ -345,154 +301,98 @@
     </div>
 
     <div class="game-list">
-
-      <!-- ===== EXAMPLE GAME CARD (Copy This to Add More) ===== -->
-      <!--
-
-      <div class="game-card">
-        <h3>Example Game Title</h3>
-        <p>Short description of the game.</p>
-        <button class="play-btn" data-url="https://example.com">Play</button>
-      </div>
-
-      -->
-      <!-- ====================================================== -->
-
-
-      <!-- ===== Existing Games ===== -->
       <div class="game-card">
         <h3>Hito Games</h3>
-        <p>This game site hosts a collection of ported and other online games that can be played directly in the browser. Titles include Minecraft, FNAF, FNF, Subway Surfers, BuckShot Roulette, etc.</p>
+        <p>This game site hosts a collection of ported and other online games playable in-browser.</p>
         <button class="play-btn" data-url="https://i-suck-at-coding-bruh.github.io/Hito-Games/">Open</button>
       </div>
-      
+
       <div class="game-card">
         <h3>Undertale</h3>
-        <p>2D role-playing game where you can choose to fight or spare monsters.</p>
+        <p>2D RPG where you can choose to fight or spare monsters.</p>
         <button class="play-btn" data-url="https://iamchristians.github.io/assets/games/undertale/index.html">Play</button>
       </div>
 
       <div class="game-card">
         <h3>Deltarune</h3>
-        <p>A follow-up to Undertale with new characters and a dual-world system.</p>
+        <p>A follow-up to Undertale with new worlds and characters.</p>
         <button class="play-btn" data-url="https://iamchristians.github.io/assets/games/deltarune/index.html">Play</button>
       </div>
-      
+
       <div class="game-card">
         <h3>HiAnime</h3>
-        <p>Free anime streaming website with a wide variety of high-quality titles.</p>
+        <p>Free anime streaming website with high-quality titles.</p>
         <button class="play-btn" data-url="https://hianime.cx">Open</button>
       </div>
 
       <div class="game-card">
-        <h3>Offical Hito Planner</h3>
-        <p>This is just a test site, redirect to the offical site here.</p>
-        <button class="play-btn" data-url="https://wz7bgm37tchdlxvvdgd2aszt9xtzlnkd6ifjlqb.github.io/oEpKCsCugr1F4AdZIOsqPv7eVC2PcBlnPbGzQVUpjE9zyMgEcAU2XPqJrbWhIUx2vEZiCcvQBRrAfy5LWI7WqJgPFYsZXFP1dCxm/">redirect</button>
+        <h3>Official Hito Planner</h3>
+        <p>Redirect to the official Hito Planner site.</p>
+        <button class="play-btn" data-url="https://wz7bgm37tchdlxvvdgd2aszt9xtzlnkd6ifjlqb.github.io/oEpKCsCugr1F4AdZIOsqPv7eVC2PcBlnPbGzQVUpjE9zyMgEcAU2XPqJrbWhIUx2vEZiCcvQBRrAfy5LWI7WqJgPFYsZXFP1dCxm/">Redirect</button>
       </div>
-      
     </div>
   </div>
 
-  <!-- =======================
-       JAVASCRIPT LOGIC
-  ======================= -->
-<script>
-document.addEventListener('DOMContentLoaded', () => {
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const downloadBtn = document.getElementById('downloadBtn');
+      const downloadScreen = document.getElementById('downloadScreen');
+      const progressBar = document.getElementById('progressBar');
+      const progressPercent = document.getElementById('progressPercent');
+      const gamesPage = document.getElementById('gamesPage');
 
-  /* -------------------------------
-     VARIABLES & ELEMENT REFERENCES
-  --------------------------------*/
-  const downloadBtn = document.getElementById('downloadBtn');
-  const downloadScreen = document.getElementById('downloadScreen');
-  const progressBar = document.getElementById('progressBar');
-  const progressPercent = document.getElementById('progressPercent');
-  const gamesPage = document.getElementById('gamesPage');
+      let progress = 0;
+      let timer = null;
 
-  let progress = 0;
-  let timer = null;
+      const startDownload = () => {
+        downloadBtn.style.display = 'none';
+        downloadScreen.style.display = 'block';
+        timer = setInterval(() => {
+          progress = Math.min(100, progress + Math.random() * 7);
+          progressBar.style.width = progress + '%';
+          progressPercent.textContent = Math.floor(progress) + '%';
+          if (progress >= 100) clearInterval(timer);
+        }, 700);
+      };
 
-  /* -------------------------------
-     FAKE DOWNLOAD PROGRESS ANIMATION
-  --------------------------------*/
-  const startDownload = () => {
-    downloadBtn.style.display = 'none';
-    downloadScreen.style.display = 'block';
+      downloadBtn.addEventListener('click', startDownload);
 
-    timer = setInterval(() => {
-      progress = Math.min(100, progress + Math.random() * 7);
-      progressBar.style.width = progress + '%';
-      progressPercent.textContent = Math.floor(progress) + '%';
-      if (progress >= 100) clearInterval(timer);
-    }, 700);
-  };
+      document.addEventListener('keydown', e => {
+        if (e.key === '~' || e.key === '`') {
+          if (getComputedStyle(downloadScreen).display !== 'none') {
+            gamesPage.classList.add('visible');
+            clearInterval(timer);
+          }
+        }
+      });
 
-  downloadBtn.addEventListener('click', startDownload);
+      document.querySelectorAll('.play-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const url = btn.dataset.url;
+          const title = btn.previousElementSibling?.textContent?.trim().toLowerCase() || "";
 
-  /* -------------------------------
-     SECRET KEY (~) OPENS GAMES PAGE
-  --------------------------------*/
-  document.addEventListener('keydown', e => {
-    if (e.key === '~' || (e.key === '`' && e.shiftKey)) {
-      if (getComputedStyle(downloadScreen).display !== 'none') {
-        gamesPage.classList.add('visible');
-        clearInterval(timer);
-      }
-    }
-  });
+          if (title.includes("official hito planner")) {
+            window.open(url, "_blank");
+            return;
+          }
 
-  /* -------------------------------
-     PLAY BUTTONS - FULLSCREEN MODE
-  --------------------------------*/
-document.querySelectorAll('.play-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const url = btn.dataset.url;
-    const title = btn.previousElementSibling?.textContent?.trim().toLowerCase() || "";
-    
-    if (title.includes("offical hito planner")) {
-      window.open(url, "_blank");
-      return;
-    }
-    const iframe = document.createElement('iframe');
-    iframe.className = 'fullscreen-iframe';
-    iframe.src = url;
-    iframe.allowFullscreen = true;
-    iframe.style.cssText = `
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      border: none;
-      z-index: 9998;
-    `;
+          const iframe = document.createElement('iframe');
+          iframe.className = 'fullscreen-iframe';
+          iframe.src = url;
+          iframe.allowFullscreen = true;
 
-    const exitBtn = document.createElement('button');
-    exitBtn.textContent = '×';
-    exitBtn.className = 'exit-btn';
-    exitBtn.style.cssText = `
-      position: fixed;
-      top: 10px;
-      right: 20px;
-      font-size: 2rem;
-      background: rgba(0,0,0,0.5);
-      color: white;
-      border: none;
-      border-radius: 50%;
-      width: 40px;
-      height: 40px;
-      cursor: pointer;
-      z-index: 9999;
-    `;
+          const exitBtn = document.createElement('button');
+          exitBtn.textContent = '×';
+          exitBtn.className = 'exit-btn';
+          exitBtn.addEventListener('click', () => {
+            iframe.remove();
+            exitBtn.remove();
+          });
 
-    exitBtn.addEventListener('click', () => {
-      iframe.remove();
-      exitBtn.remove();
+          document.body.append(iframe, exitBtn);
+        });
+      });
     });
-
-    document.body.append(iframe, exitBtn);
-  });
-});
-</script>
-
+  </script>
 </body>
 </html>
